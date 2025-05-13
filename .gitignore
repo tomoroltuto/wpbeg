@@ -1,0 +1,10 @@
+# エディタ関連
+.vscode/
+.idea/
+*.sublime-*
+.DS_Store
+
+# 環境関連
+.env
+.env.*
+!.env.example
