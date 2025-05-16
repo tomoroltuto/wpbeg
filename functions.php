@@ -2,6 +2,8 @@
 //テーマサポート
 add_theme_support('menus');
 add_theme_support('title-tag');
+add_theme_support('post-thumbnails');
+add_theme_support('automatic-feed-links');
 
 //タイトル出力
 function wpbeg_title($title)
@@ -25,3 +27,47 @@ function wpbeg_script()
     wp_enqueue_style('style', get_template_directory_uri() . '/style.css', array(), '1.0.0');
 }
 add_action('wp_enqueue_scripts', 'wpbeg_script');
+
+function wpbeg_widgets_init()
+{
+    register_sidebar(
+        array(
+            'name'          => 'カテゴリーウィジェット',
+            'id'            => 'category_widget',
+            'description'   => 'カテゴリー用ウィジェットです',
+            'before_widget' => '<div id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h2><i class="fa fa-folder-open" aria-hidden="true"></i>',
+            'after_title'   => "</h2>\n",
+        )
+    );
+    register_sidebar(
+        array(
+            'name'          => 'タグウィジェット',
+            'id'            => 'tag_widget',
+            'description'   => 'タグ用ウィジェットです',
+            'before_widget' => '<div id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h2><i class="fa fa-tags" aria-hidden="true"></i>',
+            'after_title'   => "</h2>\n",
+        )
+    );
+    register_sidebar(
+        array(
+            'name'          => 'アーカイブウィジェット',
+            'id'            => 'archive_widget',
+            'description'   => 'アーカイブ用ウィジェットです',
+            'before_widget' => '<div id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</div>',
+            'before_title'  => '<h2><i class="fa fa-archive" aria-hidden="true"></i>',
+            'after_title'   => "</h2>\n",
+        )
+    );
+}
+add_action('widgets_init', 'wpbeg_widgets_init');
+
+function wpbeg_theme_add_editor_styles()
+{
+    add_editor_style(get_template_directory_uri() . "/css/editor-style.css");
+}
+add_action('admin_init', 'wpbeg_theme_add_editor_styles');
