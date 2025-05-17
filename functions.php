@@ -28,6 +28,12 @@ function wpbeg_script()
 }
 add_action('wp_enqueue_scripts', 'wpbeg_script');
 
+function wpbeg_theme_setup()
+{
+    load_theme_textdomain('wpbeg', get_template_directory() . '/languages');
+}
+add_action('after_setup_theme', 'wpbeg_theme_setup');
+
 function wpbeg_widgets_init()
 {
     register_sidebar(
@@ -145,9 +151,3 @@ function wpbeg_enqueue_comment_reply()
     }
 }
 add_action('wp_enqueue_scripts', 'wpbeg_enqueue_comment_reply');
-
-function wpbeg_load_theme_textdomain()
-{
-    load_theme_textdomain('wpbeg', get_template_directory() . '/languages');
-}
-add_action('after_setup_theme', 'wpbeg_load_theme_textdomain');
